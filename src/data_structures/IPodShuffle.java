@@ -1,21 +1,38 @@
 package data_structures;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 // Copyright The League of Amazing Programmers, 2015
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.jar.JarException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.advanced.AdvancedPlayer;
 
 /* 1. Download the JavaZoom jar from here: http://bit.ly/javazoom
 * 2. Right click your project and add it as an External JAR (Under Java Build Path > Libraries).*/
-public class IPodShuffle {
+public class IPodShuffle implements ActionListener{
+	Song s1 = new Song("StayingAlive.mp3");
+	Song s2 = new Song("TrumpSong.mp3");
+	ArrayList<Song> list = new ArrayList<>();
+	int i = new Random().nextInt(2);
+    JFrame frame;
+	JPanel panel;
+    JButton button1;
+    JButton button2;
 	public static void main(String[] args) throws IOException, JarException { // 3. Find an mp3 on your computer
-																				// or on the Internet.
+					
+		
 		// 4. Use the Song class below to instantiate a Song.
 		// 5. Play the Song to test that it works. }
 		/**
@@ -26,6 +43,33 @@ public class IPodShuffle {
 		 * subsequent button clicks.
 		 */
 	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JButton buttonPressed = (JButton) e.getSource();
+		if(buttonPressed == button1) {
+			
+			list.get(i).play();
+		}
+		if(buttonPressed == button2) {
+			list.get(i).stop();
+		}
+	}
+	void start() {
+		list.add(s1);
+		list.add(s2);
+		frame = new JFrame();
+		panel = new JPanel();
+		button1 = new JButton("Shuffle Play");
+		button1.addActionListener(this);
+		button2 = new JButton("Play Next Song");
+		button2.addActionListener(this);
+		panel.add(button1);
+		frame.add(panel);
+		frame.pack();
+		frame.setVisible(true);
+	}
+}
 
 	class Song {
 		private int duration;
@@ -107,4 +151,4 @@ public class IPodShuffle {
 			}
 		}
 	}
-}
+

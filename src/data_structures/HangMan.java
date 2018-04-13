@@ -17,12 +17,7 @@ public class HangMan implements KeyListener {
 	ArrayList<String> list = new ArrayList<>();
 	int random = new Random().nextInt(4);
 	String s;
-	
-	list.add("theleague");
-	list.add("Programming");
-	list.add("Keyboard");
-	list.add("ArrayList");
-	s = list.get(random);
+
 
 	public static void main(String[] args) {
 		HangMan h = new HangMan();

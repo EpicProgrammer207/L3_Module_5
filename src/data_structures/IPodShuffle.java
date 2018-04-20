@@ -22,8 +22,9 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 /* 1. Download the JavaZoom jar from here: http://bit.ly/javazoom
 * 2. Right click your project and add it as an External JAR (Under Java Build Path > Libraries).*/
 public class IPodShuffle implements ActionListener{
-	Song s1 = new Song("StayingAlive.mp3");
-	Song s2 = new Song("TrumpSong.mp3");
+	Song s1 = new Song("TrumpSong.mp3");
+	Song s2 = new Song("DankanCat.mp3");
+	Song s3 = new Song("DeadMeme.mp3");
 	ArrayList<Song> list = new ArrayList<>();
 	int i = new Random().nextInt(2);
     JFrame frame;
@@ -31,7 +32,8 @@ public class IPodShuffle implements ActionListener{
     JButton button1;
     JButton button2;
 	public static void main(String[] args) throws IOException, JarException { // 3. Find an mp3 on your computer
-					
+					IPodShuffle givemehmuserk = new IPodShuffle();
+					givemehmuserk.start();
 		
 		// 4. Use the Song class below to instantiate a Song.
 		// 5. Play the Song to test that it works. }
@@ -53,21 +55,31 @@ public class IPodShuffle implements ActionListener{
 		}
 		if(buttonPressed == button2) {
 			list.get(i).stop();
+			if(i<=list.size()-2) {
+				i = i+1;
+				list.get(i).play();
+			}
+			else {
+				list.get(0).play();
+			}
 		}
 	}
 	void start() {
 		list.add(s1);
 		list.add(s2);
+		list.add(s3);
 		frame = new JFrame();
 		panel = new JPanel();
 		button1 = new JButton("Shuffle Play");
 		button1.addActionListener(this);
-		button2 = new JButton("Play Next Song");
+		button2 = new JButton("Stop Song and play another one!");
 		button2.addActionListener(this);
 		panel.add(button1);
+		panel.add(button2);
 		frame.add(panel);
 		frame.pack();
 		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
 
